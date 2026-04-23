@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информатика: Электронды Оқулық - Диналиева Жансауле</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        :root {
+            --primary: #2563eb;
+            --secondary: #6366f1;
+            --danger: #ef4444;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            scroll-behavior: smooth;
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at top right, #3b82f6, #1d4ed8), url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .hidden { display: none; }
+        
+        .tab-content { animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .author-photo {
+            width: 100%;
+            max-width: 350px;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 2.5rem;
+            box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+            border: 8px solid white;
+            background: #e2e8f0; /* Фото жүктелмесе тұратын түс */
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s;
+        }
+        .benefit-card:hover { transform: translateX(10px); background: #f0f7ff; }
+
+        .cable-photo {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 1.25rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .cable-card {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.25rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .cable-card:hover { border-color: #3b82f6; box-shadow: 0 15px 30px rgba(59, 130, 246, 0.1); }
+
+        .network-type-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        .network-type-card:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: 0 10px 20px rgba(37, 99, 235, 0.05); }
+
+        .matching-item {
+            cursor: pointer;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            background: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .matching-item.selected { border-color: #2563eb; background: #eff6ff; transform: scale(1.02); }
+        .matching-item.correct { border-color: #10b981; background: #ecfdf5; opacity: 0.6; pointer-events: none; }
+
+        .topology-node {
+            width: 45px;
+            height: 45px;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+            position: absolute;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+
+        .theory-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 99px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            background: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. ТИТУЛДЫҚ БЕТ -->
+    <section id="home-page" class="min-h-screen hero-bg flex items-center justify-center p-6 overflow-hidden">
+        <div class="max-w-5xl w-full grid md:grid-cols-2 gap-12 items-center">
+            <div class="text-white animate__animated animate__fadeInLeft">
+                <div class="inline-block px-4 py-1 bg-blue-400/30 rounded-full text-sm font-semibold mb-6 backdrop-blur">🌐 7-сынып Информатика</div>
+                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">Цифрлық <br><span class="text-blue-300">Әлемге</span> Қадам</h1>
+                <p class="text-lg text-blue-100 mb-8 max-w-md">Компьютерлік желілер, қауіпсіздік және интерфейстер туралы интерактивті оқулық.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="showSection('author-page')" class="bg-white text-blue-700 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl transition-all transform hover:-translate-y-1">Оқулықты бастау</button>
+                    <div class="flex items-center gap-3 px-6 py-4 bg-blue-800/40 rounded-2xl border border-blue-400/30">
+                        <div class="w-10 h-10 bg-blue-300 rounded-full flex items-center justify-center text-blue-900 font-bold">ДЖ</div>
+                        <div>
+                            <p class="text-xs opacity-70">Авторы:</p>
+                            <p class="text-sm font-bold">Диналиева Жансауле</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:block animate__animated animate__zoomIn">
+                <img src="https://img.freepik.com/free-vector/floating-robot-concept-illustration_114360-5522.jpg" alt="Robot" class="relative rounded-3xl shadow-2xl border border-white/20">
+            </div>
+        </div>
+    </section>
+
+    <!-- АВТОР ТУРАЛЫ БЕТ -->
+    <section id="author-page" class="min-h-screen hidden bg-slate-50 flex items-center justify-center p-6 md:p-12">
+        <div class="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center animate__animated animate__fadeIn">
+            <div class="flex justify-center">
+                <div class="relative">
+                    <!--  -->
+                    <!-- Суретіңіз болса, төмендегі src бөлігіне сілтемені қойыңыз -->
+                    <img src="C:\Users\Алмаз\Desktop\Новая папка\12.jpeg" alt="Диналиева Жансауле" class="author-photo">
+                    <div class="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-3xl shadow-xl">
+                        <p class="text-2xl font-bold">3-курс</p>
+                        <p class="text-xs opacity-80 uppercase tracking-widest">Студенті</p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-8">
+                <div>
+                    <span class="text-blue-600 font-bold uppercase tracking-widest text-sm">— Автормен танысу</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mt-2">Диналиева Жансауле</h2>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 shrink-0">🎓</div>
+                        <div>
+                            <p class="font-bold text-slate-700 text-lg">Физика, математика және информатика факультеті</p>
+                            <p class="text-slate-500">Информатика және білімді ақпараттандыру кафедрасының студенті</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-slate-800">Бұл курс оқушыға не бере алады?</h3>
+                    <div class="grid gap-3">
+                        <div class="benefit-card">
+                            <p class="font-semibold text-slate-700">Тереңдетілген білім</p>
+                            <p class="text-sm text-slate-500">Компьютерлік желілер мен олардың құрылымын заманауи интерактивті тәсілмен меңгеру.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <p class="font-semibold text-slate-700">Қорғаныс дағдылары</p>
+                            <p class="text-sm text-slate-500">Цифрлық кеңістіктегі киберқауіптерден қорғануды және антивирустарды тиімді қолдануды үйрену.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <p class="font-semibold text-slate-700">Тәжірибелік машық</p>
+                            <p class="text-sm text-slate-500">Интерфейстерді жобалау арқылы нақты IT маманы ретінде алғашқы практикалық қадамдар жасау.</p>
+                        </div>
+                        <div class="benefit-card">
+                            <p class="font-semibold text-slate-700">Сапалы дайындық</p>
+                            <p class="text-sm text-slate-500">Бөлім бойынша жиынтық бағалауға (БЖБ) толыққанды дайындалу мүмкіндігі.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="showSection('registration-page')" class="w-full md:w-auto px-12 py-5 bg-blue-600 text-white rounded-2xl font-bold text-lg hover:bg-blue-700 transition shadow-xl hover:shadow-blue-200">Оқуды жалғастыру →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ТІРКЕЛУ -->
+    <section id="registration-page" class="min-h-screen hidden flex items-center justify-center bg-slate-50 p-6">
+        <div class="max-w-md w-full bg-white rounded-[2.5rem] shadow-2xl p-10 animate__animated animate__fadeInUp">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">👤</div>
+                <h2 class="text-3xl font-bold text-slate-800">Тіркелу</h2>
+                <p class="text-slate-500 mt-2">Оқуды бастау үшін деректеріңізді енгізіңіз</p>
+            </div>
+            <div class="space-y-6">
+                <input type="text" id="user-name" class="w-full p-4 border-2 border-slate-100 rounded-xl outline-none focus:border-blue-500" placeholder="Аты-жөніңізді енгізіңіз">
+                <select id="user-class" class="w-full p-4 border-2 border-slate-100 rounded-xl outline-none">
+                    <option value="7А">7 "А" сыныбы</option>
+                    <option value="7Ә">7 "Ә" сыныбы</option>
+                    <option value="7Б">7 "Б" сыныбы</option>
+                </select>
+                <button onclick="registerUser()" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold text-lg hover:bg-blue-700 transition">Кіру</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- МАЗМҰНЫ -->
+    <section id="menu-page" class="min-h-screen hidden bg-slate-50 p-6 md:p-12">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+                <div>
+                    <h2 class="text-4xl font-bold text-slate-800">Мазмұны</h2>
+                    <p class="mt-2 font-medium">Қош келдіңіз, <span id="display-user-name" class="text-blue-600">Оқушы</span>!</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="showSection('home-page')" class="px-5 py-3 bg-white border border-slate-200 rounded-xl font-bold text-slate-600 hover:bg-slate-100 transition shadow-sm">🏠 Басты бет</button>
+                    <button onclick="showSection('feedback-page')" class="px-5 py-3 bg-blue-600 text-white border border-blue-700 rounded-xl font-bold hover:bg-blue-700 transition shadow-sm">💬 Кері байланыс</button>
+                    <button onclick="showSection('glossary-page')" class="px-5 py-3 bg-white border border-slate-200 rounded-xl font-bold text-slate-600 hover:bg-slate-100 transition shadow-sm">📖 Глоссарий</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div onclick="showSection('topic-2-1')" class="glass-card p-8 cursor-pointer hover:shadow-2xl transition-all border-b-8 border-blue-500">
+                    <div class="text-4xl mb-4">🕸️</div>
+                    <h3 class="text-xl font-bold text-slate-800">2.1 Компьютерлік желілердің түрлері мен құрылымы</h3>
+                    <p class="text-sm text-slate-500 mt-2">LAN, WAN, MAN желілері және топологиялар.</p>
+                </div>
+                <div onclick="showSection('topic-2-2')" class="glass-card p-8 cursor-pointer hover:shadow-2xl transition-all border-b-8 border-red-500">
+                    <div class="text-4xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-bold text-slate-800">2.2 Ақпараттық қауіпсіздік және антивирустық қорғау</h3>
+                    <p class="text-sm text-slate-500 mt-2">Компьютерді зиянды бағдарламалардан қорғау.</p>
+                </div>
+                <div onclick="showSection('topic-2-3')" class="glass-card p-8 cursor-pointer hover:shadow-2xl transition-all border-b-8 border-green-500">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-bold text-slate-800">2.3 Пайдаланушы интерфейсінің түрлері</h3>
+                    <p class="text-sm text-slate-500 mt-2">CLI, GUI, Touch UI интерфейстерін бағалау.</p>
+                </div>
+                <div onclick="showSection('topic-2-4')" class="glass-card p-8 cursor-pointer hover:shadow-2xl transition-all border-b-8 border-purple-500">
+                    <div class="text-4xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-bold text-slate-800">2.4 Практикалық жұмыс</h3>
+                    <p class="text-sm text-slate-500 mt-2">Интерфейс макетін жобалау.</p>
+                </div>
+                <div onclick="showSection('topic-2-5')" class="glass-card p-8 cursor-pointer hover:shadow-2xl transition-all border-b-8 border-indigo-600 md:col-span-2 bg-indigo-50">
+                    <div class="text-4xl mb-4">📝</div>
+                    <h3 class="text-xl font-bold text-indigo-900">2.5 Жиынтық бағалау (БЖБ)</h3>
+                    <p class="text-sm text-indigo-600 mt-2">Бөлімді қорытындылауға арналған 15 тест сұрағы.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ГЛОССАРИЙ БЕТІ -->
+    <section id="glossary-page" class="min-h-screen hidden bg-slate-50 p-6 md:p-12">
+        <div class="max-w-5xl mx-auto animate__animated animate__fadeIn">
+            <div class="flex items-center gap-4 mb-10">
+                <button onclick="showSection('menu-page')" class="p-3 bg-white rounded-xl shadow-sm border hover:bg-slate-100 transition">←</button>
+                <h1 class="text-4xl font-bold text-slate-800">📖 Глоссарий</h1>
+            </div>
+            
+            <div class="bg-white rounded-[2rem] shadow-xl overflow-hidden border">
+                <table class="w-full text-left glossary-table">
+                    <thead class="bg-blue-600 text-white">
+                        <tr>
+                            <th class="p-6 font-bold uppercase tracking-wider">Термин</th>
+                            <th class="p-6 font-bold uppercase tracking-wider">Анықтамасы</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y text-slate-700">
+                        <tr>
+                            <td class="p-6 font-bold text-blue-600">LAN</td>
+                            <td class="p-6">Local Area Network — белгілі бір шағын аймақты (мектеп, кеңсе) қамтитын жергілікті желі.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-bold text-blue-600">WAN</td>
+                            <td class="p-6">Wide Area Network — елдерді, құрлықтарды байланыстыратын ауқымды желі (мысалы, Интернет).</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-bold text-blue-600">PAN</td>
+                            <td class="p-6">Personal Area Network — бір пайдаланушының құрылғыларын (телефон, сағат) байланыстыратын жеке желі.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-bold text-blue-600">Топология</td>
+                            <td class="p-6">Компьютерлік желідегі түйіндердің (компьютерлердің) бір-бірімен қосылу схемасы.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-bold text-blue-600">Киберқауіпсіздік</td>
+                            <td class="p-6">Желілерді, құрылғыларды және деректерді заңсыз қол жеткізуден немесе зақымданудан қорғау әдістері.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-bold text-blue-600">Интерфейс</td>
+                            <td class="p-6">Пайдаланушы мен компьютердің өзара әрекеттесуін қамтамасыз ететін байланыс құралы.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-bold text-blue-600">Эргономика</td>
+                            <td class="p-6">Жүйені немесе құралды пайдаланушы үшін барынша ыңғайлы және тиімді етуді зерттейтін ғылым.</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-bold text-blue-600">GUI</td>
+                            <td class="p-6">Graphical User Interface — терезелер мен белгішелер арқылы басқарылатын графикалық интерфейс.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.1 ЖЕЛІЛЕР -->
+    <section id="topic-2-1" class="min-h-screen hidden bg-white pb-32">
+        <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b p-4 px-8 flex justify-between items-center shadow-sm">
+            <button onclick="showSection('menu-page')" class="flex items-center gap-2 text-blue-600 font-bold">← Мазмұны</button>
+            <h2 class="font-bold text-slate-400 text-xs uppercase">Тақырып 2.1</h2>
+        </nav>
+
+        <div class="max-w-6xl mx-auto p-6 md:p-12 animate__animated animate__fadeIn">
+            <h1 class="text-4xl font-bold mb-10 border-l-8 border-blue-600 pl-4">Компьютерлік желілердің түрлері мен құрылымы</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="network-type-card">
+                    <span class="theory-badge bg-blue-100 text-blue-700">PAN</span>
+                    <h4 class="font-bold text-slate-800 mb-2">PAN — Дербес желі</h4>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">Жеке құрылғыларды (телефон, құлаққап) bluetooth арқылы қысқа қашықтықта байланыстырады.</p>
+                </div>
+                <div class="network-type-card">
+                    <span class="theory-badge bg-blue-100 text-blue-700">LAN</span>
+                    <h4 class="font-bold text-slate-800 mb-2">LAN — Жергілікті желі</h4>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">Бір бөлме, мектеп немесе офис ішіндегі құрылғыларды жоғары жылдамдықпен біріктіреді.</p>
+                </div>
+                <div class="network-type-card">
+                    <span class="theory-badge bg-blue-100 text-blue-700">MAN</span>
+                    <h4 class="font-bold text-slate-800 mb-2">MAN — Аймақтық желі</h4>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">Қала деңгейіндегі мекемелерді немесе бірнеше LAN желісін байланыстыратын орта көлемді желі.</p>
+                </div>
+                <div class="network-type-card">
+                    <span class="theory-badge bg-blue-100 text-blue-700">WAN</span>
+                    <h4 class="font-bold text-slate-800 mb-2">WAN — Ауқымды желі</h4>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">Үлкен географиялық аймақтарды қамтиды. Ең үлкен мысалы — Интернет.</p>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">📡 Байланыс кабельдері</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                <div class="cable-card">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=400&q=80" alt="Twisted Pair" class="cable-photo">
+                    <h5 class="font-bold text-slate-800">Бұралған жұп (Twisted Pair)</h5>
+                    <p class="text-[11px] text-slate-500 mt-2">Жергілікті желілердегі ең танымал кабель. Деректерді мыс өткізгіш арқылы тасиды.</p>
+                </div>
+                <div class="cable-card">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=400&q=80" alt="Fiber Optic" class="cable-photo">
+                    <h5 class="font-bold text-slate-800">Оптикалық талшық</h5>
+                    <p class="text-[11px] text-slate-500 mt-2">Деректерді жарық импульстарымен тасымалдайтын ең жылдам және сенімді арна.</p>
+                </div>
+                <div class="cable-card">
+                    <img src="https://kzmc.kz/media/uploads/images/koaksialnye_kabeli.jpg" alt="Coaxial Cable" class="cable-photo" onerror="this.src='https://via.placeholder.com/400x180?text=Coaxial+Cable'">
+                    <h5 class="font-bold text-slate-800">Коаксиалды кабель</h5>
+                    <p class="text-[11px] text-slate-500 mt-2">Теледидар сигналы мен ескі желілерге арналған орталық мыс өзегі бар кабель.</p>
+                </div>
+            </div>
+
+            <div class="space-y-12">
+                <div class="bg-slate-900 rounded-[3rem] p-10 text-white relative overflow-hidden shadow-2xl">
+                    <div class="max-w-3xl mx-auto flex flex-col items-center">
+                        <h3 class="text-xl font-bold text-blue-400 mb-4 uppercase tracking-widest">Желі топологиясы</h3>
+                        <p class="text-xs text-slate-400 mb-10 text-center">Түйіндердің бір-бімімен қосылу схемасын таңдаңыз:</p>
+                        <div id="topo-visual-21" class="relative w-full h-64 border border-slate-700 bg-slate-800/40 rounded-3xl flex items-center justify-center">
+                            <span class="text-slate-500 italic text-sm">Схеманы таңдаңыз</span>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 mt-10 w-full max-w-md">
+                            <button onclick="drawTopo('star')" class="py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-2xl shadow-lg transition transform hover:scale-105">🌟 Жұлдыз</button>
+                            <button onclick="drawTopo('ring')" class="py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-2xl transition transform hover:scale-105">⭕ Сақина</button>
+                            <button onclick="drawTopo('bus')" class="py-3 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-2xl transition transform hover:scale-105">🚌 Шина</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-10 md:p-12 rounded-[3rem] shadow-xl border border-blue-100">
+                    <h3 class="text-2xl font-bold mb-10 text-center text-blue-900">🧩 Сәйкестендіру тапсырмасы</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10" id="matching-21-complex">
+                        <div class="space-y-4" id="match-left-21"></div>
+                        <div class="space-y-4" id="match-right-21"></div>
+                    </div>
+                    <div id="match-status-21" class="mt-8 text-center font-bold text-blue-600 h-6"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.2 ҚАУІПСІЗДІК -->
+    <section id="topic-2-2" class="min-h-screen hidden bg-white pb-20">
+        <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b p-4 px-8 flex justify-between shadow-sm">
+            <button onclick="showSection('menu-page')" class="flex items-center gap-2 text-red-600 font-bold">← Мазмұны</button>
+            <span class="font-bold text-slate-400 uppercase text-xs">Тақырып 2.2</span>
+        </nav>
+        <div class="max-w-4xl mx-auto p-6 md:p-12">
+            <h1 class="text-4xl font-bold mb-8 border-l-8 border-red-600 pl-4">Ақпараттық қауіпсіздік және антивирустық қорғау</h1>
+            <div class="bg-red-50 p-8 rounded-3xl mb-12 text-sm text-slate-700 leading-relaxed shadow-sm">
+                <h3 class="text-lg font-bold text-red-800 mb-4 uppercase tracking-wider">Теория:</h3>
+                <p class="mb-4"><b>Ақпараттық қауіпсіздік</b> — деректерді қорғау жүйесі. <b>CIA моделі:</b> Құпиялылық, Тұтастық, Қолжетімділік.</p>
+                <p>Антивирус — зиянды кодтарды тауып, жоятын бағдарлама. Кибергигиена ережелерін сақтау (мықты пароль, екі факторлы аутентификация) өте маңызды.</p>
+            </div>
+
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-6">📺 Бейнесабақтар</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                    <div class="space-y-4">
+                        <div class="video-container shadow-2xl">
+                            <iframe src="C:\Users\Алмаз\Desktop\Новая папка\Киберқауіпсіздік!.mp4" title="Киберқауіпсіздік" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <p class="text-center font-bold text-slate-600 text-sm">1-бөлім: Вирустар мен қауіптер</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="video-container shadow-2xl">
+                            <iframe src="C:\Users\Алмаз\Desktop\Новая папка\Мультик _Дети и гаджеты_.mp4" title="Киберқауіпсіздік қорғану" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <p class="text-center font-bold text-slate-600 text-sm">2-бөлім: Қорғану әдістері</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-50 p-10 rounded-[3rem] border shadow-inner">
+                <div id="quiz-22-intro" class="text-center">
+                    <h3 class="text-2xl font-bold mb-4 text-xs uppercase tracking-widest text-slate-500">🧠 Видео бойынша тест (10 сұрақ)</h3>
+                    <button onclick="startQuiz22()" class="px-12 py-4 bg-red-600 text-white rounded-2xl font-bold shadow-lg transition active:scale-95">Тестті бастау</button>
+                </div>
+                <div id="quiz-22-box" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <span id="q22-progress" class="font-bold text-red-600">1/10</span>
+                        <div class="w-32 h-2 bg-slate-200 rounded-full"><div id="q22-bar" class="h-full bg-red-500 w-0 transition-all"></div></div>
+                    </div>
+                    <h2 id="q22-text" class="text-xl font-bold mb-10">...</h2>
+                    <div id="q22-options" class="grid gap-4"></div>
+                </div>
+                <div id="quiz-22-result" class="hidden text-center">
+                    <h2 class="text-3xl font-bold mb-4 text-red-600">Нәтиже: <span id="q22-score">0/10</span></h2>
+                    <button onclick="showSection('menu-page')" class="px-10 py-4 bg-slate-800 text-white rounded-2xl font-bold">Мәзірге оралу</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.3 ИНТЕРФЕЙС -->
+    <section id="topic-2-3" class="min-h-screen hidden bg-white pb-20">
+        <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b p-4 px-8 flex justify-between shadow-sm">
+            <button onclick="showSection('menu-page')" class="flex items-center gap-2 text-green-600 font-bold">← Мазмұны</button>
+            <span class="font-bold text-slate-400 uppercase text-xs">Тақырып 2.3</span>
+        </nav>
+        <div class="max-w-4xl mx-auto p-6 md:p-12">
+            <h1 class="text-4xl font-bold mb-8 border-l-8 border-green-500 pl-4">Пайдаланушы интерфейсінің түрлері</h1>
+            <div class="bg-green-50 p-8 rounded-3xl mb-12 text-sm text-slate-700 shadow-sm">
+                <h3 class="text-lg font-bold text-green-800 mb-2 uppercase tracking-wider text-sm">Теория:</h3>
+                <p><b>Интерфейс</b> — Пайдаланушы мен компьютерлік жүйе бағдарлама, құрылғы, веб-сайт, мобильді қосымша арасындағы өзара әрекеттесу тәсілі. Яғни, интерфейс арқылы адам жүйеге команда береді, ал жүйе жауап қайтарады. <b>Эргономика</b> —Жүйені, бағдарламаны немесе құрылғыны адамға барынша ыңғайлы, қауіпсіз және тиімді етіп жобалауды зерттейтін ғылым.Интерфейстегі эргономика мыналарды қамтамасыз етеді:көзге жайлы түстер,ыңғайлы қаріп өлшемі,логикалық орналасқан батырмалар,қолданушының қателесу мүмкіндігін азайту,шаршауды төмендету</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-black text-green-400 p-6 rounded-3xl flex flex-col justify-between shadow-2xl border-4 border-slate-800">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=400&q=80" alt="CLI Interface" class="cable-photo border border-green-900">
+                        <h4 class="font-bold border-b border-green-900 pb-2 mb-4">CLI</h4>
+                    </div>
+                    <p class="text-[10px] text-green-500/80">Командалық жол интерфейсі. Жүйе әкімшілеріне арналған жылдам басқару түрі.</p>
+                </div>
+                <div class="bg-white border-4 border-blue-500 p-6 rounded-3xl flex flex-col justify-between shadow-xl text-slate-800">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1547027072-332f09bd6bb3?auto=format&fit=crop&w=400&q=80" alt="GUI Interface" class="cable-photo border border-blue-100">
+                        <h4 class="font-bold text-blue-600 uppercase mb-4">GUI</h4>
+                    </div>
+                    <p class="text-[10px] text-slate-500">Графикалық интерфейс. Терезелер мен белгішелер арқылы басқарылады.</p>
+                </div>
+                <div class="bg-slate-800 text-white p-6 rounded-3xl flex flex-col justify-between shadow-xl border-4 border-yellow-500">
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=400&q=80" alt="Touch UI" class="cable-photo border border-slate-700">
+                        <h4 class="font-bold text-yellow-400 uppercase mb-4">Touch UI</h4>
+                    </div>
+                    <p class="text-[10px] text-slate-300">Сенсорлық интерфейс. Смартфондардағы саусақ жанасуы арқылы басқару.</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-8 text-indigo-900 uppercase tracking-widest">🎮 Викторина: Интерфейс маманы</h3>
+                <div id="quiz-23-box" class="bg-indigo-900 text-white p-10 rounded-[3rem] shadow-2xl min-h-[400px] flex flex-col items-center justify-center relative overflow-hidden">
+                    <div id="q23-container" class="w-full">
+                        <div id="q23-progress-line" class="absolute top-0 left-0 h-1 bg-yellow-400 w-0 transition-all"></div>
+                        <div id="q23-main">
+                            <h4 id="q23-question" class="text-2xl font-bold mb-10 h-20 flex items-center justify-center">...</h4>
+                            <div id="q23-options" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                        </div>
+                        <div id="q23-result" class="hidden text-center animate__animated animate__zoomIn">
+                            <h4 class="text-3xl font-bold mb-4">Бітті!</h4>
+                            <p class="text-xl">Ұпай: <span id="q23-final-score" class="font-bold text-yellow-400">0</span> / 5</p>
+                            <button onclick="resetQuiz23()" class="mt-8 px-8 py-3 bg-white text-indigo-900 rounded-xl font-bold transition active:scale-95">Қайталау</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.4 ПРАКТИКА -->
+    <section id="topic-2-4" class="min-h-screen hidden bg-slate-50 pb-20">
+        <nav class="sticky top-0 z-50 bg-white border-b p-4 px-8 flex justify-between shadow-sm">
+            <button onclick="showSection('menu-page')" class="text-purple-600 font-bold">← Мазмұны</button>
+            <h2 class="font-bold text-slate-400 uppercase text-xs">Тақырып 2.4</h2>
+        </nav>
+        <div class="max-w-4xl mx-auto p-6 md:p-12">
+            <h1 class="text-3xl font-bold mb-8 text-center text-slate-800">Интерфейс бойынша практикалық жұмыс</h1>
+            <div class="bg-white p-8 rounded-3xl shadow-sm mb-12 border-l-8 border-purple-500">
+                <h3 class="text-xl font-bold text-purple-600 mb-4 italic">📋 Нұсқаулық: Смартфон макетін жасау</h3>
+                <p class="text-sm text-slate-600">Элементтерді орналастырып, интерфейс құрастырыңыз. Иконкаларды басып, экранға қосыңыз.</p>
+            </div>
+            <div class="flex flex-col md:flex-row gap-12 items-center justify-center">
+                <div class="w-64 h-[520px] bg-slate-950 rounded-[3.5rem] border-[12px] border-slate-900 shadow-2xl relative p-6">
+                    <div id="phone-screen-24" class="h-full bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[2.5rem] p-4 grid grid-cols-3 gap-3 content-start overflow-y-auto"></div>
+                </div>
+                <div class="space-y-6">
+                    <div class="grid grid-cols-3 gap-3">
+                        <button onclick="addToPhone24('📱')" class="p-4 bg-white border rounded-2xl text-2xl hover:bg-slate-100 shadow-sm transition">📱</button>
+                        <button onclick="addToPhone24('💬')" class="p-4 bg-white border rounded-2xl text-2xl hover:bg-slate-100 shadow-sm transition">💬</button>
+                        <button onclick="addToPhone24('📸')" class="p-4 bg-white border rounded-2xl text-2xl hover:bg-slate-100 shadow-sm transition">📸</button>
+                        <button onclick="addToPhone24('⚙️')" class="p-4 bg-white border rounded-2xl text-2xl hover:bg-slate-100 shadow-sm transition">⚙️</button>
+                        <button onclick="addToPhone24('🏠')" class="p-4 bg-white border rounded-2xl text-2xl hover:bg-slate-100 shadow-sm transition">🏠</button>
+                        <button onclick="addToPhone24('🎵')" class="p-4 bg-white border rounded-2xl text-2xl hover:bg-slate-100 shadow-sm transition">🎵</button>
+                        <button onclick="addToPhone24('📧')" class="p-4 bg-white border rounded-2xl text-2xl hover:bg-slate-100 shadow-sm transition">📧</button>
+                        <button onclick="addToPhone24('📅')" class="p-4 bg-white border rounded-2xl text-2xl hover:bg-slate-100 shadow-sm transition">📅</button>
+                        <button onclick="addToPhone24('🔍')" class="p-4 bg-white border rounded-2xl text-2xl hover:bg-slate-100 shadow-sm transition">🔍</button>
+                    </div>
+                    <button onclick="document.getElementById('phone-screen-24').innerHTML = ''" class="w-full py-3 bg-red-100 text-red-600 rounded-xl font-bold">Тазалау</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2.5 БЖБ -->
+    <section id="topic-2-5" class="min-h-screen hidden bg-indigo-700 text-white p-6 md:p-12">
+        <div class="max-w-4xl mx-auto bg-white text-slate-900 rounded-[3rem] p-12 shadow-2xl">
+            <div id="quiz-final-intro">
+                <h1 class="text-4xl font-bold mb-6 text-indigo-700 text-center">Бөлім бойынша жиынтық бағалау (БЖБ)</h1>
+                <p class="text-center mb-10 text-slate-500">15 сұрақтан тұратын қорытынды тест. Сәттілік!</p>
+                <button onclick="startFinalQuiz()" class="w-full py-5 bg-indigo-600 text-white rounded-2xl font-bold text-xl shadow-xl transition active:scale-95">Тестті бастау</button>
+            </div>
+            <div id="quiz-final-box" class="hidden">
+                <div class="flex justify-between items-center mb-10">
+                    <span id="qf-progress" class="font-bold text-indigo-600">Сұрақ 1/15</span>
+                    <div class="w-48 h-2 bg-slate-100 rounded-full"><div id="qf-bar" class="h-full bg-indigo-600 w-0 transition-all"></div></div>
+                </div>
+                <h2 id="qf-text" class="text-2xl font-bold mb-10 min-h-[80px]">...</h2>
+                <div id="qf-options" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+            <div id="quiz-final-result" class="hidden text-center">
+                <h2 class="text-3xl font-bold mb-4 text-indigo-700">Нәтиже: <span id="qf-score-val">0/15</span></h2>
+                <div id="qf-review" class="space-y-3 mb-10 max-h-[300px] overflow-y-auto p-4 border rounded-2xl bg-slate-50 text-xs"></div>
+                <div class="flex gap-4">
+                    <button onclick="startFinalQuiz()" class="flex-1 py-4 bg-orange-500 text-white rounded-2xl font-bold shadow-lg">🔄 Қайта тапсыру</button>
+                    <button onclick="showSection('menu-page')" class="flex-1 py-4 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg">Оралу</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КЕРІ БАЙЛАНЫС -->
+    <section id="feedback-page" class="min-h-screen hidden bg-slate-50 p-6 md:p-12">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex items-center gap-4 mb-10">
+                <button onclick="showSection('menu-page')" class="p-3 bg-white rounded-xl shadow-sm">←</button>
+                <h1 class="text-4xl font-bold">💬 Кері байланыс</h1>
+            </div>
+            <div class="bg-white p-10 rounded-[3rem] shadow-sm border">
+                <textarea id="feedback-text-main" class="w-full p-6 border-2 border-slate-100 rounded-3xl h-64 mb-6 outline-none focus:border-blue-500" placeholder="Оқулық туралы пікіріңізді жазыңыз..."></textarea>
+                <button onclick="alert('Пікіріңіз қабылданды! Рахмет.'); showSection('menu-page');" class="w-full py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl transition active:scale-95">Жіберу</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function showSection(id) {
+            // Барлық секцияларды жасыру
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            
+            // Таңдалған секцияны көрсету
+            const target = document.getElementById(id);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo(0, 0);
+            } else {
+                console.error('Секция табылмады:', id);
+            }
+            
+            if (id === 'topic-2-1') {
+                setupMatch21Complex();
+            }
+        }
+
+        function registerUser() {
+            const name = document.getElementById('user-name').value;
+            if (!name.trim()) { 
+                alert("Есіміңізді жазыңыз!"); 
+                return; 
+            }
+            document.getElementById('display-user-name').innerText = name;
+            showSection('menu-page');
+        }
+
+        // --- 2.1 КҮРДЕЛІ СӘЙКЕСТЕНДІРУ ТАПСЫРМАСЫ ---
+        const pairs21 = [
+            { t: "LAN", d: "Мектеп немесе үй желісі", k: 0 },
+            { t: "WAN", d: "Ғаламдық интернет желісі", k: 1 },
+            { t: "PAN", d: "Bluetooth арқылы қосылатын жеке желі", k: 2 },
+            { t: "MAN", d: "Қала немесе аймақ деңгейіндегі желі", k: 3 },
+            { t: "Оптика", d: "Деректерді жарық арқылы тасымалдау", k: 4 },
+            { t: "Жұлдызша", d: "Орталық хаб арқылы қосылу", k: 5 }
+        ];
+
+        let sTerm21 = null, sDef21 = null;
+
+        function setupMatch21Complex() {
+            const l = document.getElementById('match-left-21');
+            const r = document.getElementById('match-right-21');
+            if(!l || !r) return;
+            l.innerHTML = ''; r.innerHTML = '';
+            
+            const shuffledTerms = [...pairs21].sort(() => Math.random() - 0.5);
+            const shuffledDefs = [...pairs21].sort(() => Math.random() - 0.5);
+
+            shuffledTerms.forEach(p => {
+                const div = document.createElement('div');
+                div.className = "matching-item text-xs font-bold"; div.innerText = p.t;
+                div.onclick = () => selectPart21(div, 'term', p.k);
+                l.appendChild(div);
+            });
+
+            shuffledDefs.forEach(p => {
+                const div = document.createElement('div');
+                div.className = "matching-item text-xs"; div.innerText = p.d;
+                div.onclick = () => selectPart21(div, 'def', p.k);
+                r.appendChild(div);
+            });
+        }
+
+        function selectPart21(el, type, key) {
+            const status = document.getElementById('match-status-21');
+            if(type === 'term') {
+                document.querySelectorAll('#match-left-21 .matching-item').forEach(i => i.classList.remove('selected'));
+                el.classList.add('selected'); sTerm21 = { el, key };
+            } else {
+                document.querySelectorAll('#match-right-21 .matching-item').forEach(i => i.classList.remove('selected'));
+                el.classList.add('selected'); sDef21 = { el, key };
+            }
+
+            if(sTerm21 && sDef21) {
+                if(sTerm21.key === sDef21.key) {
+                    sTerm21.el.classList.add('correct'); sDef21.el.classList.add('correct');
+                    status.innerText = "✅ Дұрыс!"; status.style.color = "green";
+                } else {
+                    status.innerText = "❌ Қате!"; status.style.color = "red";
+                }
+                const oldT = sTerm21.el; const oldD = sDef21.el;
+                sTerm21 = null; sDef21 = null;
+                setTimeout(() => {
+                    oldT.classList.remove('selected');
+                    oldD.classList.remove('selected');
+                    status.innerText = "";
+                }, 1000);
+            }
+        }
+
+        function drawTopo(type) {
+            const c = document.getElementById('topo-visual-21'); c.innerHTML = '';
+            if(type === 'star') {
+                c.innerHTML = `<div class="topology-node bg-red-500 scale-125" style="top:50%;left:50%;transform:translate(-50%,-50%)">HUB</div>
+                               <div class="topology-node" style="top:20px;left:20px">1</div>
+                               <div class="topology-node" style="top:20px;right:20px">2</div>
+                               <div class="topology-node" style="bottom:20px;left:20px">3</div>
+                               <div class="topology-node" style="bottom:20px;right:20px">4</div>`;
+            } else if(type === 'ring') {
+                c.innerHTML = `<div class="w-32 h-32 border-4 border-dashed border-blue-400 rounded-full flex items-center justify-center relative">
+                    <div class="topology-node" style="top:-25px;left:50%;margin-left:-22px">1</div>
+                    <div class="topology-node" style="bottom:-25px;left:50%;margin-left:-22px">2</div>
+                    <div class="topology-node" style="left:-25px;top:50%;margin-top:-22px">3</div>
+                    <div class="topology-node" style="right:-25px;top:50%;margin-top:-22px">4</div>
+                </div>`;
+            } else {
+                c.innerHTML = `<div class="w-full h-1 bg-blue-600 relative flex justify-around">
+                    <div class="topology-node" style="top:-50px">1</div>
+                    <div class="topology-node" style="top:10px">2</div>
+                    <div class="topology-node" style="top:-50px">3</div>
+                    <div class="topology-node" style="top:10px">4</div>
+                </div>`;
+            }
+        }
+
+        // --- 2.2 QUIZ ---
+        const q22Data = [
+            { q: "Вирустың басты қасиеті?", a: ["Өзін-өзі көбейту", "Ойын ойнату", "Музыка қосу"], c: 0 },
+            { q: "Троян қалай жасырынады?", a: ["Пайдалы бағдарлама болып", "Ешқалай жасырынбайды", "Экранның артында"], c: 0 },
+            { q: "Антивирус не істейді?", a: ["Вирусты жояды", "Экранды бояйды", "Ойындарды қосады"], c: 0 },
+            { q: "Фишингтің мақсаты?", a: ["Пароль мен деректерді ұрлау", "Балық аулау", "Хат жазысу"], c: 0 },
+            { q: "Күдікті сілтеме қауіпті ме?", a: ["Иә, өте қауіпті", "Жоқ, ештеңе етпейді", "Білмеймін"], c: 0 },
+            { q: "2FA (Екі факторлы аутентификация) деген не?", a: ["Қос қорғаныс деңгейі", "Екі экранды қолдану", "Екі тышқанмен жұмыс"], c: 0 },
+            { q: "Мықты пароль қандай болуы керек?", a: ["Әріп, сан және таңбалар жиынтығы", "12345", "Өз атыңыз бен туған жылыңыз"], c: 0 },
+            { q: "Антивирустағы 'Карантин' қызметі не?", a: ["Күдікті файлды оқшаулау", "Файлды біржола жою", "Файлды жасыру"], c: 0 },
+            { q: "Шпион бағдарлама (Spyware) не істейді?", a: ["Пайдаланушы әрекетін аңдиды", "Компьютерге көмектеседі", "Ойын ойнатады"], c: 0 },
+            { q: "Антивирусты жиі жаңарту керек пе?", a: ["Иә, вирустар базасы жаңартылуы тиіс", "Жоқ, бір рет орнатса жеткілікті", "Кейде ғана"], c: 0 }
+        ];
+        let q22I=0, q22S=0;
+        function startQuiz22() {
+            q22I=0; q22S=0;
+            document.getElementById('quiz-22-intro').classList.add('hidden');
+            document.getElementById('quiz-22-box').classList.remove('hidden');
+            document.getElementById('quiz-22-result').classList.add('hidden');
+            loadQ22();
+        }
+        function loadQ22() {
+            const d = q22Data[q22I];
+            document.getElementById('q22-progress').innerText = `${q22I+1}/10`;
+            document.getElementById('q22-bar').style.width = ((q22I+1)/10*100)+'%';
+            document.getElementById('q22-text').innerText = d.q;
+            const opt = document.getElementById('q22-options'); opt.innerHTML = '';
+            d.a.forEach((ans, i) => {
+                const b = document.createElement('button');
+                b.className = "w-full text-left p-4 border rounded-xl hover:bg-red-50 shadow-sm transition active:scale-95";
+                b.innerText = ans; b.onclick = () => { if(i===d.c) q22S++; q22I++; if(q22I<10) loadQ22(); else finishQuiz22(); };
+                opt.appendChild(b);
+            });
+        }
+        function finishQuiz22() {
+            document.getElementById('quiz-22-box').classList.add('hidden');
+            document.getElementById('quiz-22-result').classList.remove('hidden');
+            document.getElementById('q22-score').innerText = q22S + "/10";
+        }
+
+        // --- 2.3 & 2.4 ---
+        function addToPhone24(icon) {
+            const s = document.getElementById('phone-screen-24');
+            const d = document.createElement('div');
+            d.className = "w-full aspect-square bg-white/20 rounded-xl flex items-center justify-center text-xl animate__animated animate__bounceIn shadow-sm border border-white/10";
+            d.innerText = icon; s.appendChild(d);
+        }
+        
+        let q23I=0, q23S=0;
+        const q23Data = [
+            { q: "CLI (Command Line Interface) деген не?", a: ["Мәтіндік командалар арқылы басқару", "Графикалық терезелермен жұмыс"], c: 0 },
+            { q: "Эргономика интерфейске қатысты не зерттейді?", a: ["Қолдану ыңғайлылығы мен тиімділігін", "Компьютердің жұмыс жылдамдығын"], c: 0 },
+            { q: "Touch UI көбінесе қайда қолданылады?", a: ["Смартфондар мен планшеттерде", "Ескі серверлік компьютерлерде"], c: 0 },
+            { q: "GUI-дің негізгі элементі қайсысы?", a: ["Иконкалар мен терезелер", "Тек мәтіндік командалар"], c: 0 },
+            { q: "Интерфейстің басты мақсаты не?", a: ["Адам мен компьютер байланысын қамтамасыз ету", "Тек ойын ойнау үшін жасалған"], c: 0 }
+        ];
+        function loadQ23() {
+            if(q23I >= 5) {
+                document.getElementById('q23-main').classList.add('hidden');
+                document.getElementById('q23-result').classList.remove('hidden');
+                document.getElementById('q23-final-score').innerText = q23S;
+                return;
+            }
+            const d = q23Data[q23I];
+            document.getElementById('q23-progress-line').style.width = ((q23I+1)/5*100)+'%';
+            document.getElementById('q23-question').innerText = d.q;
+            const opt = document.getElementById('q23-options'); opt.innerHTML = '';
+            d.a.forEach((a,i) => {
+                const b = document.createElement('button'); 
+                b.className="p-4 bg-white/10 border border-white/20 rounded-xl hover:bg-white/20 transition text-xs font-bold active:scale-95";
+                b.innerText = a; b.onclick = () => { if(i===d.c) q23S++; q23I++; loadQ23(); };
+                opt.appendChild(b);
+            });
+        }
+        function resetQuiz23() { 
+            q23I=0; q23S=0; 
+            document.getElementById('q23-main').classList.remove('hidden'); 
+            document.getElementById('q23-result').classList.add('hidden'); 
+            loadQ23(); 
+        }
+
+        // --- 2.5 FINAL ---
+        let qfI=0, qfS=0, qfR=[];
+        const qfData = [
+            { q: "LAN мағынасы қандай?", a: ["Local Area Network", "Global Area Network"], c: 0 },
+            { q: "Интернет желісінің түрі?", a: ["WAN (Global)", "LAN (Local)"], c: 0 },
+            { q: "Bluetooth арқылы қосылатын жеке желі түрі?", a: ["PAN", "WAN"], c: 0 },
+            { q: "Оптикалық талшықтың дерек тасымалдау жылдамдығы?", a: ["Өте жоғары", "Төмен"], c: 0 },
+            { q: "CLI қандай интерфейс түріне жатады?", a: ["Мәтіндік", "Сенсорлық"], c: 0 },
+            { q: "Троян қандай бағдарлама түрі?", a: ["Зиянды вирус", "Антивирус"], c: 0 },
+            { q: "GUI-дің басты элементі?", a: ["Терезе және батырма", "Мәтіндік команда"], c: 0 },
+            { q: "Эргономиканың басты талабы?", a: ["Ыңғайлылық", "Күрделілік"], c: 0 },
+            { q: "Фишингтің негізгі мақсаты?", a: ["Жеке деректерді ұрлау", "Ақпаратты қорғау"], c: 0 },
+            { q: "Қайсысы байланыс кабелінің түрі?", a: ["Коаксиалды", "Процессорлы"], c: 0 },
+            { q: "Touch UI-ді қай құрылғыдан көреміз?", a: ["Планшетте", "Ескі принтерде"], c: 0 },
+            { q: "Антивирусты үнемі жаңарту қажет пе?", a: ["Иә", "Жоқ"], c: 0 },
+            { q: "Жұлдызша топологиясында орталықта не тұрады?", a: ["Хаб (Концентратор)", "Пернетақта"], c: 0 },
+            { q: "WAN қандай географиялық аймақты қамтиды?", a: ["Ауқымды (Әлемдік)", "Жеке бөлмені"], c: 0 },
+            { q: "Компьютер қауіпсіздігі үшін ең алдымен не керек?", a: ["Мықты пароль мен антивирус", "Экранды ашық қалдыру"], c: 0 }
+        ];
+        function startFinalQuiz() {
+            qfI=0; qfS=0; qfR=[];
+            document.getElementById('quiz-final-intro').classList.add('hidden');
+            document.getElementById('quiz-final-box').classList.remove('hidden');
+            document.getElementById('quiz-final-result').classList.add('hidden');
+            loadQF();
+        }
+        function loadQF() {
+            const d = qfData[qfI];
+            document.getElementById('qf-progress').innerText = `Сұрақ ${qfI+1}/15`;
+            document.getElementById('qf-bar').style.width = ((qfI+1)/15*100)+'%';
+            document.getElementById('qf-text').innerText = d.q;
+            const opt = document.getElementById('qf-options'); opt.innerHTML = '';
+            d.a.forEach((a,i) => {
+                const b = document.createElement('button'); 
+                b.className="p-6 border-2 rounded-2xl text-left hover:bg-indigo-50 transition text-sm font-bold hover:border-indigo-500 shadow-sm active:scale-95";
+                b.innerText = a; 
+                b.onclick = () => { 
+                    const isC = i===d.c; 
+                    if(isC) qfS++; 
+                    qfR.push({q:d.q, isC, userA: a, correctA: d.a[d.c]}); 
+                    qfI++; 
+                    if(qfI<15) loadQF(); else finishQF(); 
+                };
+                opt.appendChild(b);
+            });
+        }
+        function finishQF() {
+            document.getElementById('quiz-final-box').classList.add('hidden');
+            document.getElementById('quiz-final-result').classList.remove('hidden');
+            document.getElementById('qf-score-val').innerText = qfS + "/15";
+            const rev = document.getElementById('qf-review'); rev.innerHTML = '';
+            qfR.forEach((r, idx) => {
+                rev.innerHTML += `
+                    <div class="p-3 border-b text-left">
+                        <p class="font-bold">${idx+1}. ${r.q}</p>
+                        <p class="${r.isC ? 'text-green-600' : 'text-red-600'}">Жауабыңыз: ${r.userA}</p>
+                        ${!r.isC ? `<p class="text-blue-600">Дұрыс жауап: ${r.correctA}</p>` : ''}
+                    </div>`;
+            });
+        }
+
+        window.onload = () => { 
+            loadQ23(); 
+        };
+    </script>
+</body>
+</html>
